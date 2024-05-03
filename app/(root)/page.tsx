@@ -3,9 +3,9 @@ import RecentTransactions from '@/components/RecentTransactions';
 import RightSidebar from '@/components/RightSidebar';
 import TotalBalanceBox from '@/components/TotalBalanceBox';
 // import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
-// import { getLoggedInUser } from '@/lib/actions/user.actions';
-const Home = () => {
-  const loggedIn = { firstName: 'Suryakanta' ,lastName: 'Sinha',email: 'sinha@gmail.com'}
+import { getLoggedInUser } from '@/lib/actions/user.actions';
+const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
+  const loggedIn = await getLoggedInUser();
 
   return (
     <section className="home">
@@ -14,7 +14,7 @@ const Home = () => {
           <HeaderBox
             type="greeting"
             title="Welcome"
-            user={loggedIn?.firstName || 'Guest'}
+            user={loggedIn?.name || 'Guest'}
             subtext="Access and manage your account and transactions efficiently."
           />
 
