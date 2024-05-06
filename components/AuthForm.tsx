@@ -47,7 +47,8 @@ const AuthForm = ({ type }: { type: string }) => {
 
         try {
             // Sign up with Appwrite & create plaid token
-            if (type == 'sign-up') {
+
+            if (type === 'sign-up') {
                 const userData = {
                     firstName: data.firstName!,
                     lastName: data.lastName!,
@@ -60,6 +61,7 @@ const AuthForm = ({ type }: { type: string }) => {
                     email: data.email,
                     password: data.password
                 }
+
                 const newUser = await signUp(userData);
 
                 setUser(newUser);
@@ -80,10 +82,9 @@ const AuthForm = ({ type }: { type: string }) => {
         }
     }
 
-
     return (
         <section className="auth-form">
-            <header className="flex flex-col gap-5 md:gap-8">
+            <header className='flex flex-col gap-5 md:gap-8'>
                 <Link href="/" className="cursor-pointer flex items-center gap-1">
                     <Image
                         src="/icons/logo.svg"
@@ -111,10 +112,9 @@ const AuthForm = ({ type }: { type: string }) => {
                     </h1>
                 </div>
             </header>
-
             {user ? (
                 <div className="flex flex-col gap-4">
-                    {/* <PlaidLink user={user} variant="primary" /> */}
+                    <PlaidLink user={user} variant="primary" />
                 </div>
             ) : (
                 <>
@@ -142,6 +142,7 @@ const AuthForm = ({ type }: { type: string }) => {
                             <CustomInput control={form.control} name='email' label="Email" placeholder='Enter your email' />
 
                             <CustomInput control={form.control} name='password' label="Password" placeholder='Enter your password' />
+
                             <div className="flex flex-col gap-4">
                                 <Button type="submit" disabled={isLoading} className="form-btn">
                                     {isLoading ? (
